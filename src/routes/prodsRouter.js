@@ -38,4 +38,29 @@ prodsRouter.post('/', async (req, res) => {
     }
 })
 
+prodsRouter.put('/:id', async (req, res) => {
+    try {
+        let {id} = req.params
+        let prodToReplace = req.body
+        if (!prodToReplace.name || !prodToReplace.brand || !prodToReplace.description || !prodToReplace.price || !prodToReplace.stock || !prodToReplace.image) return res.send({ status: "Error", status: "Incomplete items. Use -name, brand, description, price, stock, image-" })
+        let newProd = await prodsSchema.updateOne({_id: id}, prodToReplace)
+        res.send({ status: "Success", newProd })
+    }
+    catch {
+        res.send({ status: "Items incomplete" })
+    }
+})
+
+prodsRouter.delete('/:id', async (req, res) => {
+    try {
+        let {id} = req.params
+        let prodDelete = await prodsSchema.deleteOne({_id: id})
+        if (prodDelete.deletedCount == 0) return res.send({ status: "Error, this product doesn't exist" })
+        res.send({ status: "Success - Product Delete" })
+    }
+    catch {
+        res.send({ status: "Error" })
+    }
+})
+
 export default prodsRouter
