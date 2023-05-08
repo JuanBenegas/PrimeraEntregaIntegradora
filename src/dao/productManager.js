@@ -1,8 +1,37 @@
 import fs from "fs"
+import ProdMongooseDao from "./productMoongoseDao.js"
 
 class ProductManager {
-    idAuto = 1
-    #products = []
+
+    constructor() {
+        this.productDao = new ProdMongooseDao
+    }
+
+    async find() {
+        return this.productDao.find()
+    }
+
+    async getOne(id) {
+        return this.productDao.getOne(id)
+    }
+
+    async create(prod) {
+        return this.productDao.create(prod)
+    }
+
+    async updateOne(id, data) {
+        return this.productDao.updateOne(id, data)
+    }
+
+    async deleteOne(id) {
+        return this.productDao.deleteOne(id)
+    }
+
+
+
+
+    // idAuto = 1
+    // #products = []
 
     // constructor() {
     //     this.path = './src/utils/products.json'
