@@ -16,11 +16,21 @@ class ProductManager {
     }
 
     async create(prod) {
-        return this.productDao.create(prod)
+        let { name, brand, description, price, stock, image } = prod
+        if (!name || !brand || !description || !price || !stock || !image) {
+            return { status: "Error", Error: "Incomplete items. Use -name, brand, description, price, stock, image-" }
+        } else {
+            return this.productDao.create(prod)
+        }
     }
 
     async updateOne(id, data) {
-        return this.productDao.updateOne(id, data)
+        if (!data.name || !data.brand || !data.description || !data.price || !data.stock || !data.image) {
+            return { status: "Error", status: "Incomplete items. Use -name, brand, description, price, stock, image-" }
+        } else {
+            return this.productDao.updateOne(id, data)
+        }
+
     }
 
     async deleteOne(id) {

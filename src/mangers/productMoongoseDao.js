@@ -1,4 +1,4 @@
-import prodSchema from "./models/prodSchema.js";
+import prodSchema from "../dao/models/prodSchema.js";
 
 class ProdMongooseDao {
     async find() {
@@ -48,7 +48,7 @@ class ProdMongooseDao {
     }
 
     async updateOne(id, data) {
-        const productsDocument = await prodSchema.findOneAndUpdate({ _id: id }, data, { new: true })
+        const productsDocument = await prodSchema.findOneAndUpdate({ _id: id.id }, data, { new: true })
 
         if (!productsDocument) {
             throw new Error('Product dont exist.');

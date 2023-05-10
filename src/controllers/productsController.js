@@ -1,4 +1,4 @@
-import ProductManager from "../dao/productManager.js"
+import ProductManager from "../mangers/productManager.js"
 
 export const getAll = async (req, res) => {
     try {
@@ -20,20 +20,18 @@ export const findOne = async (req, res) => {
 }
 
 export const createOne = async (req, res) => {
+    let body = req.body
     const manager = new ProductManager()
-    let { name, brand, description, price, stock, image } = req.body
-    if (!name || !brand || !description || !price || !stock || !image) return res.send({ status: "Error", status: "Incomplete items. Use -name, brand, description, price, stock, image-" })
-    const products = await manager.create(req.body)
-    res.send({ status: "Success", products })
+    const products = await manager.create(body)
+    res.send(products)
 }
 
 export const updateOne = async (req, res) => {
     const manager = new ProductManager()
-    let { id } = req.params
+    let id = req.params
     let prodToReplace = req.body
-    if (!prodToReplace.name || !prodToReplace.brand || !prodToReplace.description || !prodToReplace.price || !prodToReplace.stock || !prodToReplace.image) return res.send({ status: "Error", status: "Incomplete items. Use -name, brand, description, price, stock, image-" })
-    let newProd = await manager.updateOne({ id }, prodToReplace)
-    res.send({ status: "Success", newProd })
+    let newProd = await manager.updateOne(id, prodToReplace)
+    res.send(newProd)
 }
 
 export const deleteOne = async (req, res) => {
