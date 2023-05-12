@@ -15,9 +15,9 @@ void (async () => {
     const PORT = 8080
     const app = express()
     app.use(express.json())
-    app.use(express.urlencoded({extended: true}))
+    app.use(express.urlencoded({ extended: true }))
 
-    app.use('/api/productos', prodsRouter)
+    app.use('/api', prodsRouter)
 
     app.listen(PORT, () => {
         console.log("Server listening in port -->8080<--")

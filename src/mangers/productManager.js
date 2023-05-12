@@ -1,5 +1,4 @@
-import fs from "fs"
-import ProdMongooseDao from "./productMoongoseDao.js"
+import ProdMongooseDao from "../dao/productMoongoseDao.js"
 
 class ProductManager {
 
@@ -34,7 +33,7 @@ class ProductManager {
     }
 
     async deleteOne(id) {
-        return this.productDao.deleteOne(id)
+        return await this.productDao.deleteOne(id)
     }
 
 

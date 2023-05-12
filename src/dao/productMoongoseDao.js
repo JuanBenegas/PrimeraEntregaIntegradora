@@ -1,4 +1,4 @@
-import prodSchema from "../dao/models/prodSchema.js";
+import prodSchema from "./models/prodSchema.js";
 
 class ProdMongooseDao {
     async find() {

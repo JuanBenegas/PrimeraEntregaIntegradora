@@ -38,6 +38,6 @@ export const deleteOne = async (req, res) => {
     const manager = new ProductManager()
     let { id } = req.params
     let prodDelete = await manager.deleteOne({ _id: id })
-    if (!prodDelete) return res.send({ status: "Error, this product doesn't exist" })
+    if (!prodDelete.deletedCount) return res.send({ status: "Error, this product doesn't exist" })
     res.send({ status: "Success - Product Delete" })
 }
